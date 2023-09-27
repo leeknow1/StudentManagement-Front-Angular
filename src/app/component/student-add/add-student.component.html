@@ -1,0 +1,29 @@
+<form [formGroup]="studentForm" (ngSubmit)="saveStudent()">
+    <mat-card>
+        <mat-card-header>
+            <h1>{{ title }}</h1>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-form-field class="example-full-width">
+                <mat-label>Имя:</mat-label>
+                <input matInput formControlName="firstName">
+            </mat-form-field>
+            <p>
+                <mat-form-field>
+                    <mat-label>Фамилия:</mat-label>
+                    <input matInput formControlName="lastName">
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field>
+                    <mat-label>Оценка:</mat-label>
+                    <input type="number" min="0" max="100" matInput formControlName="mark">
+                </mat-form-field>
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary">Добавить</button>
+            <button mat-raised-button color="accent" (click)="closeForm()">Отмена</button>
+        </mat-card-actions>
+    </mat-card>
+</form>

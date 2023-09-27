@@ -1,0 +1,46 @@
+<div style="text-align: center;">
+  <h1>Студенты</h1>
+</div>
+
+<div *ngIf="!studentList">
+  <h1>Нет студентов в записи!</h1>
+</div>
+
+<div *ngIf="errorMessage">
+  <h1 style="color: red;">{{ errorMessage }}</h1>
+</div>
+
+<div *ngIf="!errorMessage">
+
+  <mat-form-field style="width: 100%;">
+    <input matInput placeholder="Поиск" [(ngModel)]="searchText">
+  </mat-form-field>
+  
+  <div class="head__btns">
+    <button mat-raised-button color="primary" (click)="addStudent()" style="margin-top: 10px;">Добавить студента</button><br>
+  <mat-form-field>
+    <mat-label>Сортировать..</mat-label>
+    <mat-select (selectionChange)="getValueFromSelect($event)">
+      <mat-option value="firstName">
+        По имени
+      </mat-option>
+      <mat-option value="lastName">
+        По фамилии
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  </div>
+  
+  <mat-card *ngFor="let student of studentList | searchFilter: searchText;let i = index">
+    <mat-card-header>
+      <div style="text-align: right; width: 100%;">
+        <button (click)="editStudent(student.id)" mat-raised-button color="primary">Изменить</button>
+        <button (click)="deleteStudent(student.id)" mat-raised-button color="warn">Удалить</button>
+      </div>
+    </mat-card-header>
+    <mat-card-content routerLink="/students/{{student.id}}">
+      <div><strong>{{ i + 1 }}</strong>. {{ student.lastName }} {{ student.firstName }}</div>
+      <div>Оценка: <strong>{{ student.mark }}</strong></div>
+    </mat-card-content>
+  </mat-card>
+</div>
